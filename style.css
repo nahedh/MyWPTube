@@ -1,0 +1,706 @@
+/*
+Theme Name: MyWPTube
+Theme URI: https://nahedh.com
+Author: Nahedh AlHarbi
+Author URI: https://nahedh.com
+Description: A YouTube-style RTL WordPress theme for a tech blog.
+Version: 1.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: mywptube
+Tags: rtl, blog, video, grid, responsive
+*/
+
+/* style.css */
+body {
+  direction: rtl;
+  font-family: 'Tajawal', sans-serif;
+  background-color: #f9f9f9;
+  margin: 0;
+  padding: 0;
+  color: #222;
+}
+a {
+  color: #f57c00;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.video-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: 12px;
+  transition: transform 0.2s ease-in-out;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.video-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.video-thumbnail {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* نسبة 16:9 */
+  overflow: hidden;
+  background: #000;
+}
+.video-thumbnail img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.video-duration {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  padding: 3px 4px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 3px;
+  direction: ltr;
+  z-index: 1;
+  letter-spacing: 0.5px;
+}
+.video-meta {
+  padding: 8px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.video-title {
+  font-size: 13px;
+  line-height: 1.3;
+  font-weight: 500;
+  margin: 0 0 4px 0;
+  color: #0f0f0f;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 2.6em;
+}
+.video-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 4px;
+}
+.video-category {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.video-category a {
+  color: #606060;
+  text-decoration: none;
+  font-size: 11px;
+  font-weight: 400;
+  background-color: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+.video-category a:hover {
+  background-color: #e0e0e0;
+  color: #0f0f0f;
+  text-decoration: none;
+}
+.video-category .cat-links a:not(:last-child)::after {
+  content: none;
+}
+.video-stats {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #606060;
+  font-size: 11px;
+  margin-top: 4px;
+}
+.video-stats span {
+  display: flex;
+  align-items: center;
+}
+.video-stats .separator {
+  margin: 0 2px;
+  color: #909090;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 12px;
+    max-width: 600px;
+  }
+  
+  .video-card {
+    margin-bottom: 12px;
+  }
+
+  .video-thumbnail {
+    padding-top: 56.25%;
+  }
+  
+  .video-meta {
+    padding: 10px;
+  }
+
+  .video-title {
+    font-size: 14px;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  
+  .video-category {
+    margin-bottom: 4px;
+  }
+
+  .video-category a {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+  
+  .video-stats {
+    font-size: 12px;
+  }
+
+  .video-info {
+    gap: 6px;
+  }
+}
+
+/* تحسينات إضافية للشاشات الصغيرة جداً */
+@media (max-width: 480px) {
+  .grid-container {
+    padding: 8px;
+  }
+
+  .video-card {
+    border-radius: 6px;
+  }
+
+  .video-meta {
+    padding: 8px;
+  }
+}
+
+/* Single Video Page Styles */
+.single-video-container {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.video-content {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.video-player {
+  position: relative;
+  padding-bottom: 56.25%; /* نسبة 16:9 */
+  height: 0;
+  overflow: hidden;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background: #000;
+}
+
+.video-player iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.video-player img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-title {
+  font-size: 24px;
+  margin: 0 0 15px 0;
+  color: #333;
+}
+
+.video-meta-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.video-stats {
+  display: flex;
+  gap: 15px;
+  color: #666;
+  font-size: 14px;
+}
+
+.views-count, .publish-date {
+  display: flex;
+  align-items: center;
+}
+
+.video-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.like-button, .share-button {
+  background: #f0f0f0;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.like-button:hover, .share-button:hover {
+  background: #e0e0e0;
+}
+
+.video-description {
+  margin: 20px 0;
+  line-height: 1.6;
+  color: #333;
+  font-size: 15px;
+}
+
+.video-description p {
+  margin-bottom: 15px;
+}
+
+.video-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.tag {
+  background: #f0f0f0;
+  padding: 6px 12px;
+  border-radius: 15px;
+  font-size: 13px;
+  color: #666;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.tag:hover {
+  background: #e0e0e0;
+  color: #333;
+  text-decoration: none;
+}
+
+.related-videos {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.related-videos h3 {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  color: #333;
+}
+
+.related-video-card {
+  margin-bottom: 15px;
+}
+
+.related-thumbnail {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.related-thumbnail img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.related-video-card h4 {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .single-video-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .related-videos {
+    margin-top: 20px;
+  }
+  
+  .video-meta-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .video-actions {
+    width: 100%;
+  }
+}
+
+/* أنماط التفاعلات */
+.like-button.liked {
+  background: #ff4444;
+  color: white;
+}
+
+.like-button.liked:hover {
+  background: #ff3333;
+}
+
+.share-button {
+  background: #4285f4;
+  color: white;
+}
+
+.share-button:hover {
+  background: #3367d6;
+}
+
+/* تأثيرات الحركة */
+.like-button, .share-button {
+  transition: all 0.3s ease;
+}
+
+.like-button:active, .share-button:active {
+  transform: scale(0.95);
+}
+
+/* رسائل التأكيد */
+.share-button.copied {
+  background: #0f9d58;
+}
+
+/* تحسينات للهواتف المحمولة */
+@media (max-width: 768px) {
+  .video-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .like-button, .share-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* تنسيق أحجام الصور */
+.video-card .video-thumbnail {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* نسبة 16:9 */
+    overflow: hidden;
+}
+
+.video-card .video-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* تنسيق بطاقات الفيديو في الشبكة */
+.grid-container .video-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.grid-container .video-meta {
+    flex: 1;
+    padding: 12px;
+}
+
+/* تنسيق الصور في الصفحة الرئيسية */
+.post-thumbnail {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* نسبة 16:9 */
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.post-thumbnail img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* تمييز المقاطع المثبتة */
+.video-card.sticky {
+  position: relative;
+  border: 1px solid #f57c00;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(245, 124, 0, 0.1);
+}
+
+.video-card.sticky::before {
+  content: "مميز";
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: #f57c00;
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  z-index: 1;
+}
+
+/* تحديث حجم خط العنوان في الصفحة الرئيسية */
+.grid-container .video-title {
+  font-size: 15.6px; /* زيادة من 13px إلى 15.6px (زيادة 20%) */
+  line-height: 1.4;
+  font-weight: 500;
+  margin: 0 0 4px 0;
+  color: #0f0f0f;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 2.8em;
+}
+
+@media (max-width: 768px) {
+  .grid-container .video-title {
+    font-size: 16.8px; /* زيادة من 14px إلى 16.8px (زيادة 20%) */
+    line-height: 1.4;
+  }
+}
+
+/* أنماط الشريط العلوي */
+.site-header {
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 8px 0;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* أنماط الشعار واسم الموقع */
+.site-branding {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+.custom-logo {
+  height: 40px;
+  width: auto;
+}
+
+.site-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f0f0f;
+  margin: 0;
+}
+
+.site-slogan {
+  font-size: 12px;
+  color: #606060;
+  display: block;
+}
+
+/* تحديث أنماط البحث */
+.search-container {
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  flex-direction: row-reverse;
+}
+
+.search-input {
+  flex: 1;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 0 20px 20px 0;
+  border-right: none;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.search-input:focus {
+  border-color: #1a73e8;
+}
+
+.search-button {
+  background: #f8f8f8;
+  border: 1px solid #ccc;
+  border-left: none;
+  border-radius: 20px 0 0 20px;
+  padding: 8px 20px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.search-button:hover {
+  background: #f0f0f0;
+}
+
+/* تحديث أنماط الترقيم */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  gap: 20px;
+}
+
+.pagination .page-numbers {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  color: #606060;
+  font-size: 14px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  min-width: 100px;
+}
+
+.pagination .page-numbers.current {
+  background: #f57c00;
+  border-color: #f57c00;
+  color: #fff;
+}
+
+.pagination .page-numbers:hover:not(.current) {
+  background: #f0f0f0;
+  border-color: #ccc;
+}
+
+.pagination .next,
+.pagination .prev {
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .pagination {
+    gap: 10px;
+  }
+
+  .pagination .page-numbers {
+    padding: 6px 12px;
+    min-width: 80px;
+    font-size: 13px;
+  }
+}
+
+/* أنماط أيقونات التواصل */
+.social-icons {
+  display: flex;
+  gap: 16px;
+}
+
+.social-icon {
+  color: #606060;
+  font-size: 18px;
+  transition: color 0.2s;
+}
+
+.social-icon:hover {
+  color: #f57c00;
+}
+
+/* تحسينات للهواتف المحمولة */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .site-branding {
+    flex-direction: column;
+    text-align: center;
+    gap: 4px;
+  }
+
+  .search-container {
+    width: 100%;
+  }
+
+  .social-icons {
+    margin-top: 12px;
+  }
+}
