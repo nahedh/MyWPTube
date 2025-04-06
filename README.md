@@ -55,7 +55,7 @@
 
 ## المؤلف
 
-تم تطوير القالب بواسطة [Nahedh AlHarbi](https://nahedh.com)
+تم تطوير القالب بواسطة [Nahedh Alharbi](https://nahedh.com)
 
 ## الإصدار
 
